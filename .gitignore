@@ -1,12 +1,33 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+node_modules/
+__generated__
+.expo/*
+.idea/*
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
-# testing
-/coverage
+# macOS
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Web release
+web/dist
+
+# see https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 # next.js
 /.next/
@@ -16,21 +37,13 @@
 /build
 
 # misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# local env files
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Next.js
+/.next/*
+/out/
+# Next.js production
+/build/
+# Next.js dependencies
+/.pnp
+.pnp.js
+# @end @expo/next-adapter
+node_modules

@@ -9,12 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "18.11.13",
-    "@types/react": "18.0.26",
-    "@types/react-dom": "18.0.9",
+    "@radix-ui/react-dropdown-menu": "^2.0.1",
+    "@radix-ui/react-visually-hidden": "^1.0.1",
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "5.3.6",
     "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.13",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "@types/styled-components": "5.1.26"
+  },
+  "resolutions": {
+    "styled-components": "5"
   }
 }
