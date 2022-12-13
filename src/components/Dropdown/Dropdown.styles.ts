@@ -3,7 +3,7 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu';
 
 export const Trigger = styled(Dropdown.Trigger)`
   position: relative;
-  width: 320px;
+  width: 100%;
   height: 50px;
   border-radius: 10px;
   overflow: hidden;
@@ -16,12 +16,14 @@ export const Trigger = styled(Dropdown.Trigger)`
   align-items: center;
   justify-content: space-between;
   padding: 0px 20px;
+  outline: none;
 `;
 
 export const IconWrapper = styled.div`
   transition: 0.5s;
-  width: 36px;
-  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   [data-state='open'] & {
     transform: rotateX(180deg);

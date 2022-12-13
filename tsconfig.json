@@ -19,7 +19,7 @@
       "@components/*": ["./components/*"],
       "@lib/*": ["./lib/*"],
       "@theme/*": ["./theme/*"],
-      "@hooks/*": ["./hooks/*"],
+      "@contexts/*": ["./contexts/*"],
       "@assets/*": ["./assets/*"],
       "@types/*": ["./types/*"],
       "@public/*": ["../public/*"]

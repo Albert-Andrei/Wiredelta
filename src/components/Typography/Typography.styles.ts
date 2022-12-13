@@ -11,7 +11,7 @@ export const TextContainer = styled.p<{
   font-size: ${({ size, theme }) => (size ? size : theme.fontSizes.normal)}px;
   font-weight: ${({ font }) =>
     font === 'bold' ? '700' : font === 'normal' ? '400' : '300'};
-  color: ${({ theme }) => theme.colors.grey9};
+  color: ${({ theme, color }) => (color ? color : theme.default.fontColor)};
   display: inline-block;
   text-align: ${({ align }) => (align ? align : 'left')};
   justify-content: ${({ align }) =>

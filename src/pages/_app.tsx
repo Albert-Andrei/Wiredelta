@@ -1,22 +1,30 @@
-import '../styles/globals.css';
 import GlobalStyle from '../styles/global';
 import { ThemeProvider } from 'styled-components';
 import { useState } from 'react';
 import { lightTheme, darkTheme } from '../theme';
-import { DarkMode } from '@hooks/useDarkMode';
+import { ThemeContextProvider } from 'contexts/ThemeContext';
+import { SWRConfig } from 'swr';
+
+const fetcher = (url: string) =>
+  fetch(`https://pokeapi.co/api/v2${url}`).then((r) => r.json());
 
 function MyApp({ Component, pageProps }: any) {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-  const theme = darkMode ? darkTheme : lightTheme;
-
   return (
-    <DarkMode.Provider value={{ darkMode, setDarkMode }}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+    <SWRConfig
+      value={{
+        fetcher,
+      }}
+    >
+      <ThemeContextProvider>
+        {(darkMode) => (
+          <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            <GlobalStyle />
 
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </DarkMode.Provider>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        )}
+      </ThemeContextProvider>
+    </SWRConfig>
   );
 }
 

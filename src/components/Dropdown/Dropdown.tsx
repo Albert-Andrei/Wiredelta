@@ -2,19 +2,23 @@ import { useEffect, useState } from 'react';
 import { IconWrapper, Item, Content, Trigger } from './Dropdown.styles';
 import Typography from '@components/Typography';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { ArrowDown } from '@components/Icons/ArrowDown';
-import theme from '@theme/theme';
-// import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
+import { useTheme } from 'styled-components';
 
 interface DropdownProps {
   label?: string;
-  options: string[];
+  options: DropdownMenuItem[];
   onChange?: (e?: any) => void;
 }
 
+export interface DropdownMenuItem {
+  label: string;
+  value: string;
+}
+
 const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const theme = useTheme();
+  const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
 
   useEffect(() => {
     if (options) {
@@ -26,24 +30,23 @@ const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
     <Dropdown.Root>
       <Trigger>
         <Typography size={19} color={theme.default.fontColor} opacity={0.5}>
-          {label || selectedItem}
+          {label || selectedItem?.label}
         </Typography>
         <IconWrapper>
           <ArrowDown />
         </IconWrapper>
       </Trigger>
-
       <Content>
-        {options.map((value, index) => (
+        {options.map((option) => (
           <Item
-            key={index + value}
+            key={option.label}
             onClick={() => {
-              setSelectedItem(value);
+              setSelectedItem(option);
             }}
-            active={value === selectedItem}
+            active={option.label === selectedItem?.label}
           >
             <Typography size={19} color={theme.default.fontColor}>
-              {value}
+              {option.label}
             </Typography>
           </Item>
         ))}

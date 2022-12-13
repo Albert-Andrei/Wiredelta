@@ -1,4 +1,4 @@
-export const ArrowDown = () => (
+export const Search = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -10,6 +10,7 @@ export const ArrowDown = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <polyline points="6 9 12 15 18 9"></polyline>
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
 );
