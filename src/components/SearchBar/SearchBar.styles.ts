@@ -23,6 +23,15 @@ export const SearchBarContainer = styled.div<{ darkMode: boolean }>`
   justify-content: space-between;
   padding: 0px 20px;
   outline: none;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    height: 40px;
+    border-radius: 8px;
+
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const Input = styled.input`
@@ -35,4 +44,8 @@ export const Input = styled.input`
   background: ${({ theme }) => theme.default.primary};
   letter-spacing: 1px;
   font-weight: 300;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    font-size: 15px;
+  }
 `;

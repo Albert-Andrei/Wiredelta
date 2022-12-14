@@ -5,6 +5,8 @@ interface MediaQueries {
   minSm?: any;
   maxMd?: any;
   minMd?: any;
+  maxLg?: any;
+  minLg?: any;
 }
 
 export interface ITheme {
@@ -41,7 +43,7 @@ export interface ITheme {
   breakpoints: MediaQueries;
 }
 
-const breakpoints = ['40em', '64em'];
+const breakpoints = ['40em', '64em', '95em'];
 
 const theme: DefaultTheme = {
   default: {
@@ -79,6 +81,8 @@ const theme: DefaultTheme = {
     minSm: `@media screen and (min-width: ${breakpoints[0]})`,
     maxMd: `@media screen and (max-width: ${breakpoints[1]})`,
     minMd: `@media screen and (min-width: ${breakpoints[1]})`,
+    maxLg: `@media screen and (max-width: ${breakpoints[2]})`,
+    minLg: `@media screen and (min-width: ${breakpoints[2]})`,
   },
 };
 

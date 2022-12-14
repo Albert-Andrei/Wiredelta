@@ -7,6 +7,10 @@ export const SearchBarContainer = styled.div`
   background: ${({ theme }) => theme.default.background};
   box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
   padding: 25px 0;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    padding: 15px 0;
+  }
 `;
 
 export const Grid = styled.div`
@@ -14,4 +18,8 @@ export const Grid = styled.div`
   display: inline-grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 190px;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    gap: 90px;
+  }
 `;

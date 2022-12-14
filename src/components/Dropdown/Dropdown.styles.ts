@@ -17,6 +17,15 @@ export const Trigger = styled(Dropdown.Trigger)`
   justify-content: space-between;
   padding: 0px 20px;
   outline: none;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    height: 40px;
+    border-radius: 8px;
+
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const IconWrapper = styled.div<{ darkMode: boolean }>`
@@ -46,7 +55,7 @@ export const hide = keyframes({
 });
 
 export const Content = styled(Dropdown.Content)`
-  width: 320px;
+  width: 310px;
   padding: 20px;
   padding-bottom: 5px;
   overflow: hidden;
@@ -61,6 +70,14 @@ export const Content = styled(Dropdown.Content)`
 
   &[data-state='closed'] {
     animation: ${hide} 0.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  }
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    width: 260px;
+
+    p {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -84,5 +101,9 @@ export const Item = styled(Dropdown.Item)<{ isActive: boolean }>`
 
   &:focus {
     outline: none !important;
+  }
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    margin-bottom: 10px;
   }
 `;
