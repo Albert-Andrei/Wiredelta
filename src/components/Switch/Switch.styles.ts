@@ -12,6 +12,11 @@ export const SwitchContaier = styled(SwitchPrimitive.Root)`
   margin: 0px;
   background: transparent;
   opacity: 0.5;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    width: 37px;
+    border: 1.5px solid ${({ theme }) => theme.colors.blue};
+  }
 `;
 
 export const Thumb = styled(SwitchPrimitive.Thumb)`
@@ -29,6 +34,15 @@ export const Thumb = styled(SwitchPrimitive.Thumb)`
 
   &[data-state='checked'] {
     transform: translateX(17px);
+
+    ${({ theme }) => theme.breakpoints.maxLg} {
+      transform: translateX(15px);
+    }
+  }
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    width: 14px;
+    height: 14px;
   }
 `;
 
