@@ -3,7 +3,7 @@ import { Search } from '@components/Icons/Search';
 import { Input, SearchBarContainer } from './SearchBar.styles';
 
 interface SearchBarProps {
-  onChange: (val: string) => void;
+  onChange: (text: string) => void;
 }
 
 const SearchBar = ({ onChange }: SearchBarProps) => {

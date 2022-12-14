@@ -6,25 +6,66 @@ import Pagination from '@components/Pagination';
 import ThemeSwitch from '@components/ThemeSwitch';
 import styled from 'styled-components';
 import { Container } from '@components/Container';
+import { Pokemon } from '../types/pokemon.types';
+import { ResultSort, PageSize } from '../types/dropdown.types';
+import { multiFetcher } from '@lib/fetchers';
+import Card from '@components/Card';
+import Skeleton from '@components/Skeleton';
 
 const Landing: NextPage = () => {
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-  const pageSize = 10;
   const [pageNumber, setPageNumber] = useState(1);
-  const { data, isLoading } = useSWR('/ability?limit=327&offset=0');
+  const [searchText, setSearchText] = useState('');
+  const [sortType, setSortType] = useState<string>(ResultSort.ASC);
+  const [pageSize, setPageSize] = useState<number>(Number(PageSize.TEN));
+  const { data } = useSWR<Pokemon.Response>('/pokemon?limit=1154');
 
-  // results
-  // search text
-  // results per page
-  // sort criteria
-  // page
+  const { data: allPokemon, isLoading } = useSWR<Pokemon.PokemonResponse[]>(
+    data?.results.map((pok) => pok.name),
+    multiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
-  // content = useMemo(() => {}, [...dependencies])
-  // ---> filter & sort
+  const sortedResult = useMemo(() => {
+    if (!allPokemon) {
+      return [];
+    }
+
+    switch (sortType) {
+      case ResultSort.ASC:
+        return allPokemon.sort((a, b) => a.name.localeCompare(b.name));
+      case ResultSort.DESC:
+        return allPokemon.sort((a, b) => -1 * a.name.localeCompare(b.name));
+      case ResultSort.HEIGHT:
+        return allPokemon.sort((a, b) => a.height - b.height);
+      case ResultSort.WEIGHT:
+        return allPokemon.sort((a, b) => a.weight - b.weight);
+      default:
+        return allPokemon;
+    }
+  }, [allPokemon, sortType]);
+
+  const content = useMemo(() => {
+    if (!sortedResult) {
+      return [];
+    }
+
+    return sortedResult
+      .filter((poke) =>
+        poke.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+      )
+      .slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+  }, [sortedResult, sortType, pageSize, pageNumber, searchText]);
 
   const pages = useMemo(() => {
-    return Math.ceil(array.length / pageSize);
-  }, [pageSize]);
+    if (!allPokemon) {
+      return 1;
+    }
+    return Math.ceil(allPokemon.length / pageSize);
+  }, [allPokemon, pageSize]);
 
   const handleNextPage = () => {
     if (pages > pageNumber) {
@@ -37,10 +78,6 @@ const Landing: NextPage = () => {
       setPageNumber((prev) => prev - 1);
     }
   };
-  // function paginate(array, page_size, page_number) {
-  //   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
-  //   return array.slice((page_number - 1) * page_size, page_number * page_size);
-  // }
 
   const pagination = (
     <Pagination
@@ -54,22 +91,47 @@ const Landing: NextPage = () => {
   return (
     <ContentContainer>
       <title>Pokemons</title>
-      <NavigationBar onChange={() => {}} />
+      <NavigationBar
+        onSearch={(text) => setSearchText(text)}
+        onSortTypeChange={(option) => setSortType(option.value)}
+        onPageSizeChange={(option) => setPageSize(Number(option.value))}
+      />
       <Container>
         <Main>
           <SwitchWrapper>
             <ThemeSwitch />
           </SwitchWrapper>
-          <div style={{ marginTop: 20 }}>{pagination}</div>
-          <Grid>
-            {array.map((value) => (
-              <div
-                key={value}
-                style={{ width: '100%', height: 400, background: 'red' }}
-              />
-            ))}
-          </Grid>
-          <div style={{ marginTop: 50, marginBottom: 50 }}>{pagination}</div>
+          {!data ? (
+            <SpinnerWrapper>
+              <Spinner />
+            </SpinnerWrapper>
+          ) : (
+            <>
+              <div style={{ marginTop: 20 }}>{pagination}</div>
+              <Grid>
+                {isLoading && !allPokemon
+                  ? [...Array(20)].map((_, index) => <Skeleton key={index} />)
+                  : content?.map((value) => {
+                      const abilities = value.abilities
+                        .map((ab) => ab.ability.name)
+                        .slice(0, 2);
+                      return (
+                        <Card
+                          key={value.name}
+                          name={value.name}
+                          height={value.height}
+                          weight={value.weight}
+                          abilities={abilities}
+                          image={value.sprites.front_default}
+                        />
+                      );
+                    })}
+              </Grid>
+              <div style={{ marginTop: 50, marginBottom: 50 }}>
+                {pagination}
+              </div>
+            </>
+          )}
         </Main>
       </Container>
     </ContentContainer>
@@ -86,6 +148,7 @@ const ContentContainer = styled.div`
 const Main = styled.div`
   position: relative;
   width: 100%;
+  min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,6 +165,31 @@ const Grid = styled.div`
   margin-top: 30px;
   width: 100%;
   display: inline-grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 50px;
+`;
+
+const SpinnerWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+`;
+
+const Spinner = styled.div`
+  border: 5px solid ${({ theme }) => theme.colors.blue}50;
+  border-top: 5px ${({ theme }) => theme.colors.blue} solid;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;

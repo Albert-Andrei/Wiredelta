@@ -9,15 +9,6 @@ export const SearchBarContainer = styled.div`
   padding: 25px 0;
 `;
 
-export const Container = styled.div`
-  width: 100%;
-  max-width: 1620px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
-`;
-
 export const Grid = styled.div`
   width: 100%;
   display: inline-grid;

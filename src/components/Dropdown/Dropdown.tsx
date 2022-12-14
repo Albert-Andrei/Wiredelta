@@ -4,16 +4,12 @@ import Typography from '@components/Typography';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import { ArrowDown } from '@components/Icons/ArrowDown';
 import { useTheme } from 'styled-components';
+import { DropdownMenuItem } from '../../types/dropdown.types';
 
 interface DropdownProps {
   label?: string;
   options: DropdownMenuItem[];
-  onChange?: (e?: any) => void;
-}
-
-export interface DropdownMenuItem {
-  label: string;
-  value: string;
+  onChange: (option: DropdownMenuItem) => void;
 }
 
 const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
@@ -21,10 +17,15 @@ const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
   const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
 
   useEffect(() => {
-    if (options) {
+    if (options?.length > 0) {
       setSelectedItem(options[0]);
     }
   }, []);
+
+  const handleChange = (option: DropdownMenuItem) => {
+    setSelectedItem(option);
+    onChange(option);
+  };
 
   return (
     <Dropdown.Root>
@@ -40,10 +41,8 @@ const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
         {options.map((option) => (
           <Item
             key={option.label}
-            onClick={() => {
-              setSelectedItem(option);
-            }}
-            active={option.label === selectedItem?.label}
+            onClick={() => handleChange(option)}
+            isActive={option.label === selectedItem?.label}
           >
             <Typography size={19} color={theme.default.fontColor}>
               {option.label}

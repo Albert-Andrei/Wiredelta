@@ -4,13 +4,10 @@ import * as Styles from './Switch.styles';
 
 export interface SwitchProps {
   checked?: boolean;
-  onChange: (e?: any) => void;
+  onChange: () => void;
 }
 
-export const Switch: React.FC<SwitchProps> = ({
-  checked,
-  onChange,
-}: SwitchProps) => {
+const Switch = ({ checked, onChange }: SwitchProps) => {
   const theme = useTheme();
   const darkMode = useDarkMode();
 
@@ -26,3 +23,5 @@ export const Switch: React.FC<SwitchProps> = ({
     </Styles.SwitchContaier>
   );
 };
+
+export default Switch;

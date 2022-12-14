@@ -10,6 +10,8 @@ interface MediaQueries {
 export interface ITheme {
   default: {
     background: string;
+    primary: string;
+    secondary: string;
     fontColor: string;
   };
   colors: {
@@ -67,6 +69,8 @@ const breakpoints = ['40em', '64em'];
 const theme: DefaultTheme = {
   default: {
     background: '',
+    primary: '',
+    secondary: '',
     fontColor: '',
   },
   colors: {

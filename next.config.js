@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['raw.githubusercontent.com', 'rerollcdn.com'],
+  },
 };
 
 module.exports = nextConfig;

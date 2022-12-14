@@ -6,6 +6,8 @@ const lightTheme: DefaultTheme = {
   default: {
     background: '#fff',
     fontColor: '#4B4343',
+    primary: '#fff',
+    secondary: '',
   },
 };
 

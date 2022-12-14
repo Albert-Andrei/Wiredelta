@@ -1,12 +1,9 @@
 import GlobalStyle from '../styles/global';
 import { ThemeProvider } from 'styled-components';
-import { useState } from 'react';
 import { lightTheme, darkTheme } from '../theme';
 import { ThemeContextProvider } from 'contexts/ThemeContext';
 import { SWRConfig } from 'swr';
-
-const fetcher = (url: string) =>
-  fetch(`https://pokeapi.co/api/v2${url}`).then((r) => r.json());
+import { fetcher } from '@lib/fetchers';
 
 function MyApp({ Component, pageProps }: any) {
   return (

@@ -59,11 +59,11 @@ export const Content = styled(Dropdown.Content)`
   }
 `;
 
-export const Item = styled(Dropdown.Item)<{ active: boolean }>`
+export const Item = styled(Dropdown.Item)<{ isActive: boolean }>`
   margin-bottom: 15px;
 
   p {
-    opacity: ${({ active }) => (active ? 0.5 : 1)};
+    opacity: ${({ isActive }) => (isActive ? 0.5 : 1)};
     text-decoration: none;
   }
 
@@ -72,8 +72,8 @@ export const Item = styled(Dropdown.Item)<{ active: boolean }>`
     background: white;
 
     p {
-      font-weight: ${({ active }) => (active ? '300' : '500')};
-      text-decoration: ${({ active }) => (active ? 'none' : 'underline')};
+      font-weight: ${({ isActive }) => (isActive ? '300' : '500')};
+      text-decoration: ${({ isActive }) => (isActive ? 'none' : 'underline')};
     }
   }
 

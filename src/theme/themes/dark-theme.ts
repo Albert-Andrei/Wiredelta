@@ -6,6 +6,8 @@ const darkTheme: DefaultTheme = {
   default: {
     background: '#1F374A',
     fontColor: '#fff',
+    primary: '#4B4343',
+    secondary: '',
   },
 };
 

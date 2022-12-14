@@ -2,32 +2,45 @@ import Dropdown from '@components/Dropdown';
 import SearchBar from '@components/SearchBar';
 import { Container } from '@components/Container';
 import { Grid, SearchBarContainer } from './NavigationBar.styles';
+import {
+  DropdownMenuItem,
+  PageSize,
+  ResultSort,
+} from '../../types/dropdown.types';
 
 interface NavigationBarProps {
-  onChange: (val: string) => void;
+  onSearch: (text: string) => void;
+  onSortTypeChange: (option: DropdownMenuItem) => void;
+  onPageSizeChange: (option: DropdownMenuItem) => void;
 }
 
-const NavigationBar = ({ onChange }: NavigationBarProps) => {
+const NavigationBar = ({
+  onSearch,
+  onPageSizeChange,
+  onSortTypeChange,
+}: NavigationBarProps) => {
   return (
     <SearchBarContainer>
       <Container>
         <Grid>
           <Dropdown
             options={[
-              { label: 'Show 10 results', value: '0' },
-              { label: 'Show 20 results', value: '0' },
-              { label: 'Show 30 results', value: '0' },
+              { label: 'Show 10 results', value: PageSize.TEN },
+              { label: 'Show 20 results', value: PageSize.TWENTY },
+              { label: 'Show 30 results', value: PageSize.THIRTY },
             ]}
+            onChange={onPageSizeChange}
           />
-          <SearchBar onChange={onChange} />
+          <SearchBar onChange={onSearch} />
           <Dropdown
             label="Sort items"
             options={[
-              { label: 'From A-Z', value: '0' },
-              { label: 'From Z-A', value: '1' },
-              { label: 'By Height', value: '2' },
-              { label: 'By Weight', value: '3' },
+              { label: 'From A-Z', value: ResultSort.ASC },
+              { label: 'From Z-A', value: ResultSort.DESC },
+              { label: 'By Height', value: ResultSort.HEIGHT },
+              { label: 'By Weight', value: ResultSort.WEIGHT },
             ]}
+            onChange={onSortTypeChange}
           />
         </Grid>
       </Container>
