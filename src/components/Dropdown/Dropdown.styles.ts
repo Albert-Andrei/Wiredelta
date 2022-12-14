@@ -7,9 +7,9 @@ export const Trigger = styled(Dropdown.Trigger)`
   height: 50px;
   border-radius: 10px;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  box-shadow: 0px 2px 10px #00000029;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
 
   outline-color: transparent;
   display: flex;
@@ -19,11 +19,16 @@ export const Trigger = styled(Dropdown.Trigger)`
   outline: none;
 `;
 
-export const IconWrapper = styled.div`
+export const IconWrapper = styled.div<{ darkMode: boolean }>`
   transition: 0.5s;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  svg {
+    stroke: ${({ theme, darkMode }) =>
+      darkMode ? theme.colors.white : theme.colors.blue};
+  }
 
   [data-state='open'] & {
     transform: rotateX(180deg);
@@ -45,10 +50,10 @@ export const Content = styled(Dropdown.Content)`
   padding: 20px;
   padding-bottom: 5px;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 10px;
-  box-shadow: 0px 2px 10px #00000029;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
 
   &[data-state='open'] {
     animation: ${show} 0.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;

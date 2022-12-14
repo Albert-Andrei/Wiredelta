@@ -5,7 +5,7 @@ export const SearchBarContainer = styled.div`
   z-index: 10;
   width: 100%;
   background: ${({ theme }) => theme.default.background};
-  box-shadow: 0px 2px 10px #00000029;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
   padding: 25px 0;
 `;
 

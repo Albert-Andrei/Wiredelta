@@ -1,14 +1,21 @@
 import styled from 'styled-components';
 
-export const SearchBarContainer = styled.div`
+export const SearchBarContainer = styled.div<{ darkMode: boolean }>`
   width: 100%;
   height: 50px;
   overflow: hidden;
   border-radius: 10px;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  box-shadow: 0px 2px 10px #00000029;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
+  border-color: ${({ theme, darkMode }) =>
+    darkMode ? theme.default.primary : theme.colors.grey};
+
+  svg {
+    stroke: ${({ theme, darkMode }) =>
+      darkMode ? theme.colors.white : theme.colors.blue};
+  }
 
   outline-color: transparent;
   display: flex;
@@ -25,6 +32,7 @@ export const Input = styled.input`
   margin-left: 10px;
   font-size: 20px;
   color: ${({ theme }) => theme.default.fontColor};
+  background: ${({ theme }) => theme.default.primary};
   letter-spacing: 1px;
   font-weight: 300;
 `;

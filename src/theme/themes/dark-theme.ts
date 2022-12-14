@@ -8,6 +8,7 @@ const darkTheme: DefaultTheme = {
     fontColor: '#fff',
     primary: '#4B4343',
     secondary: '',
+    shadow: '#FFFFFF29',
   },
 };
 

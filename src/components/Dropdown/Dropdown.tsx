@@ -5,6 +5,7 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import { ArrowDown } from '@components/Icons/ArrowDown';
 import { useTheme } from 'styled-components';
 import { DropdownMenuItem } from '../../types/dropdown.types';
+import { useDarkMode } from '@contexts/ThemeContext';
 
 interface DropdownProps {
   label?: string;
@@ -14,6 +15,7 @@ interface DropdownProps {
 
 const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
   const theme = useTheme();
+  const darkMode = useDarkMode();
   const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
 
   useEffect(() => {
@@ -29,15 +31,23 @@ const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
 
   return (
     <Dropdown.Root>
-      <Trigger>
+      <Trigger
+        style={{
+          borderColor: darkMode ? theme.default.primary : theme.colors.grey,
+        }}
+      >
         <Typography size={19} color={theme.default.fontColor} opacity={0.5}>
           {label || selectedItem?.label}
         </Typography>
-        <IconWrapper>
+        <IconWrapper darkMode={darkMode}>
           <ArrowDown />
         </IconWrapper>
       </Trigger>
-      <Content>
+      <Content
+        style={{
+          borderColor: darkMode ? theme.default.primary : theme.colors.grey,
+        }}
+      >
         {options.map((option) => (
           <Item
             key={option.label}

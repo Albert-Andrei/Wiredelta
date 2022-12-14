@@ -24,8 +24,8 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
   const darkMode = useDarkMode();
 
   return (
-    <CardContainer>
-      <ImageWrapper>
+    <CardContainer darkMode={darkMode}>
+      <ImageWrapper darkMode={darkMode}>
         <Image
           src={image || 'https://rerollcdn.com/ARCEUS/Pokemon/Egg.png'}
           fill
@@ -75,7 +75,11 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
       <Separator />
 
       <DetailsButton>
-        <Typography fontSize={18} font="bold" color={theme.colors.blue}>
+        <Typography
+          fontSize={18}
+          font="bold"
+          color={darkMode ? theme.colors.white : theme.colors.blue}
+        >
           See Details
         </Typography>
       </DetailsButton>

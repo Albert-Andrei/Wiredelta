@@ -18,7 +18,7 @@ export const CardSkeleton = styled.div`
   position: relative;
   border: 1px solid #f5f5f5;
   border-radius: 30px;
-  box-shadow: 0px 2px 10px #00000029;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
   padding: 30px;
 `;
 

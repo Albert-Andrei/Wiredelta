@@ -1,23 +1,29 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ darkMode: boolean }>`
   width: 100%;
   padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid #f5f5f5;
-  border-radius: 30px;
-  box-shadow: 0px 2px 10px #00000029;
+  border-radius: ${({ darkMode }) => (darkMode ? 10 : 20)}px;
+  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
+  border-color: ${({ theme, darkMode }) =>
+    darkMode ? theme.default.primary : theme.colors.grey};
+  background: ${({ theme }) => theme.default.primary};
 `;
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled.div<{ darkMode: boolean }>`
   position: relative;
   width: 100%;
   height: 0px;
   padding-bottom: 100%;
   overflow: hidden;
   border-radius: 20px;
+  border: 1px solid #f5f5f5;
+  border-color: ${({ theme, darkMode }) =>
+    darkMode ? theme.colors.white : theme.colors.blue};
   background-color: ${({ theme }) => theme.colors.blue};
 `;
 
