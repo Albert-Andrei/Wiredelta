@@ -167,6 +167,10 @@ const Grid = styled.div`
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 50px;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    gap: 30px;
+  }
 `;
 
 const SpinnerWrapper = styled.div`

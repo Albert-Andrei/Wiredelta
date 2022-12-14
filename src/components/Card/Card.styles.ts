@@ -12,6 +12,10 @@ export const CardContainer = styled.div<{ darkMode: boolean }>`
   border-color: ${({ theme, darkMode }) =>
     darkMode ? theme.default.primary : theme.colors.grey};
   background: ${({ theme }) => theme.default.primary};
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    padding: 15px;
+  }
 `;
 
 export const ImageWrapper = styled.div<{ darkMode: boolean }>`
@@ -25,6 +29,10 @@ export const ImageWrapper = styled.div<{ darkMode: boolean }>`
   border-color: ${({ theme, darkMode }) =>
     darkMode ? theme.colors.white : theme.colors.blue};
   background-color: ${({ theme }) => theme.colors.blue};
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    border-radius: 15px;
+  }
 `;
 
 export const ContentRow = styled.div<{ marginTop?: number }>`
@@ -33,6 +41,16 @@ export const ContentRow = styled.div<{ marginTop?: number }>`
   justify-content: space-between;
   align-items: flex-start;
   margin-top: ${({ marginTop }) => marginTop || '0'}px;
+
+  p {
+    font-size: 18px;
+  }
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const AbilitiesWrapper = styled.div`
@@ -41,6 +59,10 @@ export const AbilitiesWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   min-height: 53px;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    min-height: 35px;
+  }
 `;
 
 export const Separator = styled.div`
@@ -48,6 +70,10 @@ export const Separator = styled.div`
   height: 3px;
   margin-top: 70px;
   background: #e4e4e4;
+
+  ${({ theme }) => theme.breakpoints.maxLg} {
+    margin-top: 30px;
+  }
 `;
 
 export const DetailsButton = styled.button`

@@ -46,22 +46,16 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
         {name}
       </Typography>
       <ContentRow>
-        <Typography fontSize={18} font="bold">
-          Height
-        </Typography>
-        <Typography fontSize={18}>{height}</Typography>
+        <Typography font="bold">Height</Typography>
+        <Typography>{height}</Typography>
       </ContentRow>
       <ContentRow marginTop={5}>
-        <Typography fontSize={18} font="bold">
-          Weight
-        </Typography>
+        <Typography font="bold">Weight</Typography>
 
-        <Typography fontSize={18}>{weight}</Typography>
+        <Typography>{weight}</Typography>
       </ContentRow>
       <ContentRow marginTop={5}>
-        <Typography fontSize={18} font="bold">
-          Abilities
-        </Typography>
+        <Typography font="bold">Abilities</Typography>
 
         <AbilitiesWrapper>
           {abilities.map((value) => (
