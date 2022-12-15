@@ -25,6 +25,7 @@ const NavigationBar = ({
 }: NavigationBarProps) => {
   return (
     <SearchBarContainer>
+      {/* @TODO: Fix the icon sizes*/}
       <Container>
         <Grid>
           <Dropdown

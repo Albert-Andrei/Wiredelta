@@ -32,6 +32,7 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
 
   return (
     <CardContainer darkMode={darkMode}>
+      {/* @TODO: Add all the fonts that are in design for different paragraphss*/}
       <ImageWrapper darkMode={darkMode} onClick={handleClick}>
         <Image
           src={image || defaultPokemonImage}
@@ -75,6 +76,7 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
 
       <Separator />
 
+      {/* @TODO: A prop to hide the button*/}
       <DetailsButton darkMode={darkMode} onClick={handleClick}>
         <Typography
           fontSize={18}

@@ -21,12 +21,15 @@ const Foldable = ({
   const darkMode = useDarkMode();
   return (
     <AccordionContainer value={'item-' + index}>
+      {/* @TODO: Blue title color when opened*/}
       <Accordion.Header style={{ width: '100%', margin: 0 }}>
         <TitleWrapper darkMode={darkMode}>
           <Typography font="bold">{title}</Typography>
         </TitleWrapper>
       </Accordion.Header>
 
+      {/* @TODO: Proper animation */}
+      {/* @TODO: Add the animated icon on the right side*/}
       <Content darkMode={darkMode}>{children}</Content>
     </AccordionContainer>
   );

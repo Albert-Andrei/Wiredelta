@@ -60,6 +60,8 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
             <Typography>Height: {pokemon?.height}</Typography>
             <Typography>Weight: {pokemon?.weight}</Typography>
             <Typography>Base experience: {pokemon?.base_experience}</Typography>
+
+            {/* @TODO: Add proper information*/}
             <Typography>Default: {'true'}</Typography>
             <Typography>Order: {1}</Typography>
             <Typography textTransform="capitalize">
@@ -67,6 +69,8 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
             </Typography>
           </DetailsWrapper>
 
+          {/* @TODO: Add missing information*/}
+          {/* @TODO: Properly update the style based on theme*/}
           <AccordionWrapper type="single" collapsible>
             {pokemon?.abilities?.length && (
               <AccordionItem index={1} title="Abilities">
@@ -170,6 +174,7 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
               </AccordionItem>
             )}
           </AccordionWrapper>
+          {/* @TODO: Add suggestions*/}
         </ContentContainer>
       </Container>
     </Main>

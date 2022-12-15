@@ -13,6 +13,8 @@ const Switch = ({ checked, onChange }: SwitchProps) => {
 
   return (
     <Styles.SwitchContaier checked={checked} onCheckedChange={onChange}>
+      {/* @TODO: Make the size dynamic*/}
+      {/* @TODO: Properly implement the dark mode variant*/}
       <Styles.Thumb>
         <Styles.ThumbContent
           style={{

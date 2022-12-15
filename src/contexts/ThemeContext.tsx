@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 export interface ThemeContextValues {
   darkMode: boolean;

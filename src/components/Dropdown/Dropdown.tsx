@@ -17,20 +17,12 @@ interface DropdownProps {
 const DropdownMenu = ({ label, options, value, onChange }: DropdownProps) => {
   const theme = useTheme();
   const darkMode = useDarkMode();
-  // const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
 
   const selectedItem = useMemo(() => {
     return options.find((x) => x.value === value) || options[0];
   }, [value, options]);
 
-  // useEffect(() => {
-  //   if (options?.length > 0) {
-  //     setSelectedItem(options[0]);
-  //   }
-  // }, []);
-
   const handleChange = (option: DropdownMenuItem) => {
-    // setSelectedItem(option);
     onChange(option);
   };
 
@@ -48,6 +40,8 @@ const DropdownMenu = ({ label, options, value, onChange }: DropdownProps) => {
           <ArrowDown />
         </IconWrapper>
       </Trigger>
+
+      {/* @TODO: Find a way to make the width dynamic based on Trigger*/}
       <Content
         style={{
           borderColor: darkMode ? theme.default.primary : theme.colors.grey,

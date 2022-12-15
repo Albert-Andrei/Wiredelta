@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import useSWR from 'swr';
 import type { NextPage } from 'next';
 import NavigationBar from '@components/NavigationBar';
