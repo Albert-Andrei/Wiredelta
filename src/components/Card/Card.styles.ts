@@ -2,13 +2,18 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div<{ darkMode: boolean }>`
   width: 100%;
-  padding: 30px 30px 20px 30px;
+  padding: ${({ theme }) => theme.spacings.xlarge}px
+    ${({ theme }) => theme.spacings.xlarge}px
+    ${({ theme }) => theme.spacings.large}px
+    ${({ theme }) => theme.spacings.xlarge}px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid #f5f5f5;
-  border-radius: ${({ darkMode }) => (darkMode ? 10 : 20)}px;
-  box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
+  border-radius: ${({ darkMode, theme }) =>
+    darkMode ? theme.spacings.small : theme.spacings.large}px;
+  box-shadow: 0px 2px ${({ theme }) => theme.spacings.small}px
+    ${({ theme }) => theme.default.shadow};
   border-color: ${({ theme, darkMode }) =>
     darkMode ? theme.default.primary : theme.colors.grey};
   background: ${({ theme }) => theme.default.primary};
@@ -25,14 +30,14 @@ export const ImageWrapper = styled.div<{ darkMode: boolean }>`
   height: 0px;
   padding-bottom: 100%;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.spacings.large}px;
   border: 1px solid #f5f5f5;
   border-color: ${({ theme, darkMode }) =>
     darkMode ? theme.colors.white : theme.colors.blue};
   background-color: ${({ theme }) => theme.colors.blue};
 
   ${({ theme }) => theme.breakpoints.maxLg} {
-    border-radius: 15px;
+    border-radius: ${({ theme }) => theme.spacings.medium}px;
   }
 `;
 
@@ -73,7 +78,7 @@ export const Separator = styled.div`
   background: #e4e4e4;
 
   ${({ theme }) => theme.breakpoints.maxLg} {
-    margin-top: 30px;
+    margin-top: ${({ theme }) => theme.spacings.xlarge}px;
   }
 `;
 

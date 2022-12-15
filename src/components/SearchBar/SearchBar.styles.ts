@@ -4,7 +4,7 @@ export const SearchBarContainer = styled.div<{ darkMode: boolean }>`
   width: 100%;
   height: 50px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.spacings.small}px;
   overflow: hidden;
   background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -21,7 +21,7 @@ export const SearchBarContainer = styled.div<{ darkMode: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 0px ${({ theme }) => theme.spacings.large}px;
   outline: none;
 
   ${({ theme }) => theme.breakpoints.maxLg} {
@@ -38,8 +38,8 @@ export const Input = styled.input`
   width: 100%;
   border: 0px;
   outline: none;
-  margin-left: 10px;
-  font-size: 20px;
+  margin-left: ${({ theme }) => theme.spacings.small}px;
+  font-size: ${({ theme }) => theme.spacings.large}px;
   color: ${({ theme }) => theme.default.fontColor};
   background: ${({ theme }) => theme.default.primary};
   letter-spacing: 1px;

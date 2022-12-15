@@ -54,7 +54,6 @@ const Landing: NextPage = () => {
         return allPokemon;
     }
   }, [allPokemon, sortType]);
-  console.log('Mam-ta ', sortType);
 
   const content = useMemo(() => {
     if (!sortedResult) {
@@ -171,19 +170,19 @@ const Main = styled.div`
 
 const SwitchWrapper = styled.div`
   position: absolute;
-  top: 20px;
+  top: ${({ theme }) => theme.spacings.large}px;
   right: 0px;
 `;
 
 const Grid = styled.div`
-  margin-top: 30px;
+  margin-top: ${({ theme }) => theme.spacings.xlarge}px;
   width: 100%;
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 50px;
 
   ${({ theme }) => theme.breakpoints.maxLg} {
-    gap: 30px;
+    gap: ${({ theme }) => theme.spacings.xlarge}px;
   }
 `;
 

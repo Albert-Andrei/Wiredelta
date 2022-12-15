@@ -17,9 +17,9 @@ export const CardSkeleton = styled.div`
   align-items: center;
   position: relative;
   border: 1px solid #f5f5f5;
-  border-radius: 30px;
+  border-radius: ${({ theme }) => theme.spacings.xlarge}px;
   box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
-  padding: 30px;
+  padding: ${({ theme }) => theme.spacings.xlarge}px;
 `;
 
 export const ProductSkeleton = styled.div<{
@@ -44,5 +44,5 @@ export const PictureSkeleton = styled(ProductSkeleton)`
   width: 100%;
   height: 280px;
   display: block;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.spacings.large}px;
 `;

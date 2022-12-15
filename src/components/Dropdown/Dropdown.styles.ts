@@ -5,7 +5,7 @@ export const Trigger = styled(Dropdown.Trigger)`
   position: relative;
   width: 100%;
   height: 50px;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.spacings.small}px;
   overflow: hidden;
   background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -15,7 +15,7 @@ export const Trigger = styled(Dropdown.Trigger)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 0px ${({ theme }) => theme.spacings.large}px;
   outline: none;
 
   ${({ theme }) => theme.breakpoints.maxLg} {
@@ -56,12 +56,12 @@ export const hide = keyframes({
 
 export const Content = styled(Dropdown.Content)`
   width: 310px;
-  padding: 20px;
+  padding: ${({ theme }) => theme.spacings.large}px;
   padding-bottom: 5px;
   overflow: hidden;
   background: ${({ theme }) => theme.default.primary};
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.spacings.small}px;
   box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
 
   &[data-state='open'] {
@@ -104,6 +104,6 @@ export const Item = styled(Dropdown.Item)<{ isActive: boolean }>`
   }
 
   ${({ theme }) => theme.breakpoints.maxLg} {
-    margin-bottom: 10px;
+    margin-bottom: ${({ theme }) => theme.spacings.small}px;
   }
 `;

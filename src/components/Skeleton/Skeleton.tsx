@@ -8,7 +8,7 @@ import {
 const Skeleton = () => (
   <CardSkeleton>
     <PictureSkeleton />
-    <ProductSkeleton marginTop="20px">&zwnj;</ProductSkeleton>
+    <ProductSkeleton marginTop="">&zwnj;</ProductSkeleton>
     <ProductSkeleton>&zwnj;</ProductSkeleton>
     <ProductSkeleton width="40%">&zwnj;</ProductSkeleton>
     <ProductSkeleton width="60%" height="24px" marginTop="70px" />

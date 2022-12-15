@@ -18,8 +18,6 @@ export function useLocalStorage<T>(key: string, fallbackValue: T) {
       return;
     }
 
-    console.log('---> value', { value });
-
     localStorage.setItem(key, `${value}`);
   }, [value]);
 

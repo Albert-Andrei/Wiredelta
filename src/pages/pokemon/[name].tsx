@@ -235,7 +235,7 @@ const StyledButton = styled.button<{ darkMode: boolean }>`
     darkMode ? theme.colors.white : theme.colors.blue};
   border: 1px solid #367aac;
   box-shadow: 0px 2px 10px #00000029;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.spacings.small}px;
   overflow: hidden;
   cursor: pointer;
   transition: border 0.2s ease-in;
@@ -285,18 +285,18 @@ const ImageWrapper = styled.div`
   padding-bottom: 100%;
   background: #367aac;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.spacings.large}px;
 `;
 
 const SwitchWrapper = styled.div`
   width: 100%;
-  height: 20px;
+  height: ${({ theme }) => theme.spacings.large}px;
   display: flex;
   justify-content: flex-end;
 `;
 
 const NameWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: ${({ theme }) => theme.spacings.xlarge}px;
 
   p {
     font-size: 30px;
@@ -304,7 +304,7 @@ const NameWrapper = styled.div`
 `;
 
 const DetailsWrapper = styled.div`
-  margin-top: 15px;
+  margin-top: ${({ theme }) => theme.spacings.medium}px;
   height: 50px;
   display: inline-grid;
   grid-template-columns: repeat(6, auto);
