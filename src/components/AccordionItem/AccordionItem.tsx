@@ -1,30 +1,33 @@
 import Typography from '@components/Typography';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import {
   AccordionContainer,
-  ContentText,
+  Content,
   TitleWrapper,
-} from './Accordion.styles';
+} from './AccordionItem.styles';
+import { useDarkMode } from '@contexts/ThemeContext';
 
 export interface AccordionProps {
   index: number;
   title: String;
-  content: String;
 }
 
-const Foldable = ({ index, title, content }: AccordionProps) => {
+const Foldable = ({
+  index,
+  title,
+  children,
+}: PropsWithChildren<AccordionProps>) => {
+  const darkMode = useDarkMode();
   return (
     <AccordionContainer value={'item-' + index}>
       <Accordion.Header style={{ width: '100%', margin: 0 }}>
-        <TitleWrapper>
-          <Typography></Typography>
+        <TitleWrapper darkMode={darkMode}>
+          <Typography font="bold">{title}</Typography>
         </TitleWrapper>
       </Accordion.Header>
 
-      <ContentText>
-        <Typography></Typography>
-      </ContentText>
+      <Content darkMode={darkMode}>{children}</Content>
     </AccordionContainer>
   );
 };

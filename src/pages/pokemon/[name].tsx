@@ -2,28 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { fetcher } from '@lib/fetchers';
 import { Pokemon } from '../../types/pokemon.types';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Container } from '@components/Container';
 import Image from 'next/image';
 import ThemeSwitch from '@components/ThemeSwitch';
 import Typography from '@components/Typography';
 import { ArrowDown } from '@components/Icons/ArrowDown';
 import { useDarkMode } from '@contexts/ThemeContext';
-import Accordion from '@components/Accordion';
 import { defaultPokemonImage } from '@constants/defaultImageSources';
+import AccordionItem from '@components/AccordionItem';
+import { AccordionSingleProps, Root } from '@radix-ui/react-accordion';
 
 interface PokemonPageProps {
   pokemon: Pokemon.PokemonResponse;
 }
 
 const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
+  const theme = useTheme();
   const darkMode = useDarkMode();
-  if (pokemon === null) {
-    console.log('<Opaaaaaa>');
-  }
 
   return (
-    <Main>
+    <Main darkMode={darkMode}>
       <Container>
         <ContentContainer>
           <Grid>
@@ -62,7 +61,109 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
             </Typography>
           </DetailsWrapper>
 
-          {/* <Accordion index={1} title={'Abilities'} content={''} /> */}
+          <AccordionWrapper type="single" collapsible>
+            {pokemon?.abilities?.length && (
+              <AccordionItem index={1} title="Abilities">
+                <ContentWrapper>
+                  {pokemon?.abilities.map((ability) => (
+                    <Typography
+                      key={ability?.ability?.name}
+                      marginBottom={10}
+                      textTransform="capitalize"
+                    >
+                      <span
+                        style={{
+                          color: darkMode
+                            ? theme.colors.white
+                            : theme.colors.blue,
+                          marginRight: 10,
+                        }}
+                      >
+                        •
+                      </span>
+                      {ability?.ability?.name}
+                    </Typography>
+                  ))}
+                </ContentWrapper>
+              </AccordionItem>
+            )}
+            {pokemon?.forms?.length && (
+              <AccordionItem index={2} title="Forms">
+                <ContentWrapper>
+                  {pokemon?.forms.map((form) => (
+                    <Typography
+                      key={form?.name}
+                      marginBottom={10}
+                      textTransform="capitalize"
+                    >
+                      <span
+                        style={{
+                          color: darkMode
+                            ? theme.colors.white
+                            : theme.colors.blue,
+                          marginRight: 10,
+                        }}
+                      >
+                        •
+                      </span>
+                      {form?.name}
+                    </Typography>
+                  ))}
+                </ContentWrapper>
+              </AccordionItem>
+            )}
+            {pokemon?.types?.length && (
+              <AccordionItem index={3} title="Types">
+                <ContentWrapper>
+                  {pokemon?.types.map((type) => (
+                    <Typography
+                      key={type.type.name}
+                      marginBottom={10}
+                      textTransform="capitalize"
+                    >
+                      <span
+                        style={{
+                          color: darkMode
+                            ? theme.colors.white
+                            : theme.colors.blue,
+                          marginRight: 10,
+                        }}
+                      >
+                        •
+                      </span>
+                      Name: {type.type.name}
+                      <Typography marginLeft={50}>Slot: {type.slot}</Typography>
+                    </Typography>
+                  ))}
+                </ContentWrapper>
+              </AccordionItem>
+            )}
+            {pokemon?.game_indices?.length && (
+              <AccordionItem index={4} title="Game indices">
+                <ContentWrapper>
+                  {pokemon?.game_indices.map((ind, index) => (
+                    <Typography
+                      key={ind.version.name + index.toString()}
+                      marginBottom={10}
+                      textTransform="capitalize"
+                    >
+                      <span
+                        style={{
+                          color: darkMode
+                            ? theme.colors.white
+                            : theme.colors.blue,
+                          marginRight: 10,
+                        }}
+                      >
+                        •
+                      </span>
+                      Game Index: {ind.game_index} Version: {ind.version.name}
+                    </Typography>
+                  ))}
+                </ContentWrapper>
+              </AccordionItem>
+            )}
+          </AccordionWrapper>
         </ContentContainer>
       </Container>
     </Main>
@@ -98,9 +199,10 @@ export const getStaticProps: GetStaticProps<PokemonPageProps> = async ({
   };
 };
 
-const Main = styled.div`
+const Main = styled.div<{ darkMode: boolean }>`
   min-height: 100vh;
-  background: ${({ theme }) => theme.default.primary};
+  background: ${({ theme, darkMode }) =>
+    darkMode ? '#1F374A' : theme.colors.white};
 `;
 
 const ContentContainer = styled.div`
@@ -108,6 +210,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 760px;
 `;
 
 const Grid = styled.div`
@@ -205,4 +308,22 @@ const DetailsWrapper = styled.div`
     font-size: 20px;
     color: ${({ theme }) => theme.default.fontColor};
   }
+`;
+
+type AccordionRootProps = AccordionSingleProps &
+  React.RefAttributes<HTMLDivElement>;
+
+const AccordionWrapper = styled(Root)<AccordionRootProps>`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 35px 10px 35px;
 `;
