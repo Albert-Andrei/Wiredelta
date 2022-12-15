@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Summary
+
+There are several approaches to implementing a Pokermon Database viewer. I initially considered using pagination, as the API I was using supported it. However, I needed to perform specific filter queries, and the API did not support filtering (at least I didn't find). As a result, I decided to fetch all the data, which allowed me to perform any query I needed. However, fetching all the data takes a long time and is not the most efficient solution.
+
+In summary, there were many small design differences that made the implementation quite time-consuming. I believe I identified and addressed most of them, but there are still some that I didn't get to. I marked these as @TODO for future reference.
+
+To improve performance, techniques like static-site generation (SSG) and stale-while-revalidate (SWR) can be used for fetching and caching data. 
+
+To see the deployed version open [https://wiredelta.vercel.app/](https://wiredelta.vercel.app/).
 
 ## Getting Started
 
