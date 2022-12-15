@@ -12,6 +12,8 @@ import { useDarkMode } from '@contexts/ThemeContext';
 import { defaultPokemonImage } from '@constants/defaultImageSources';
 import AccordionItem from '@components/AccordionItem';
 import { AccordionSingleProps, Root } from '@radix-ui/react-accordion';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 interface PokemonPageProps {
   pokemon: Pokemon.PokemonResponse;
@@ -19,14 +21,18 @@ interface PokemonPageProps {
 
 const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
   const theme = useTheme();
+  const router = useRouter();
   const darkMode = useDarkMode();
 
   return (
     <Main darkMode={darkMode}>
+      <Head>
+        <title>{pokemon?.name}</title>
+      </Head>
       <Container>
         <ContentContainer>
           <Grid>
-            <StyledButton darkMode={darkMode}>
+            <StyledButton darkMode={darkMode} onClick={() => router.back()}>
               <IconWrapper>
                 <ArrowDown />
               </IconWrapper>

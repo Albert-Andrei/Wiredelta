@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div<{ darkMode: boolean }>`
   width: 100%;
-  padding: 30px;
+  padding: 30px 30px 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +20,7 @@ export const CardContainer = styled.div<{ darkMode: boolean }>`
 
 export const ImageWrapper = styled.div<{ darkMode: boolean }>`
   position: relative;
+  cursor: pointer;
   width: 100%;
   height: 0px;
   padding-bottom: 100%;
@@ -76,8 +77,29 @@ export const Separator = styled.div`
   }
 `;
 
-export const DetailsButton = styled.button`
+export const DetailsButton = styled.button<{ darkMode: boolean }>`
+  cursor: pointer;
   margin-top: 15px;
   border: none;
   background: none;
+  padding-bottom: 10px;
+  border-bottom: 2px solid blue;
+  border-color: transparent;
+  transition: all 0.3s;
+
+  p {
+    transition: all 0.3s;
+    scale: 1;
+  }
+
+  &:hover {
+    border-color: ${({ theme, darkMode }) =>
+      darkMode ? theme.colors.white : theme.colors.blue};
+    transition: all 0.3s;
+
+    p {
+      transition: all 0.3s;
+      scale: 1.1;
+    }
+  }
 `;

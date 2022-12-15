@@ -9,12 +9,16 @@ import {
 } from '../../types/dropdown.types';
 
 interface NavigationBarProps {
+  pageSize: string;
+  sortType: string;
   onSearch: (text: string) => void;
   onSortTypeChange: (option: DropdownMenuItem) => void;
   onPageSizeChange: (option: DropdownMenuItem) => void;
 }
 
 const NavigationBar = ({
+  pageSize,
+  sortType,
   onSearch,
   onPageSizeChange,
   onSortTypeChange,
@@ -24,6 +28,7 @@ const NavigationBar = ({
       <Container>
         <Grid>
           <Dropdown
+            value={pageSize}
             options={[
               { label: 'Show 10 results', value: PageSize.TEN },
               { label: 'Show 20 results', value: PageSize.TWENTY },
@@ -33,6 +38,7 @@ const NavigationBar = ({
           />
           <SearchBar onChange={onSearch} />
           <Dropdown
+            value={sortType}
             label="Sort items"
             options={[
               { label: 'From A-Z', value: ResultSort.ASC },

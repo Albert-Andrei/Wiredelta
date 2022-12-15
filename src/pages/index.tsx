@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import type { NextPage } from 'next';
 import NavigationBar from '@components/NavigationBar';
@@ -11,13 +11,20 @@ import { ResultSort, PageSize } from '../types/dropdown.types';
 import { multiFetcher } from '@lib/fetchers';
 import Card from '@components/Card';
 import Skeleton from '@components/Skeleton';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+import Head from 'next/head';
 
 const Landing: NextPage = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [searchText, setSearchText] = useState('');
-  const [sortType, setSortType] = useState<string>(ResultSort.ASC);
-  const [pageSize, setPageSize] = useState<number>(Number(PageSize.TEN));
+  const [sortType, setSortType] = useLocalStorage('type', ResultSort.ASC);
+  const [pageSizeValue, setPageSizeValue] = useLocalStorage(
+    'size',
+    PageSize.TEN,
+  );
   const { data } = useSWR<Pokemon.Response>('/pokemon?limit=1154');
+
+  const pageSize = parseInt(pageSizeValue ?? PageSize.TEN);
 
   const { data: allPokemon, isLoading } = useSWR<Pokemon.PokemonResponse[]>(
     data?.results.map((pok) => pok.name),
@@ -47,6 +54,7 @@ const Landing: NextPage = () => {
         return allPokemon;
     }
   }, [allPokemon, sortType]);
+  console.log('Mam-ta ', sortType);
 
   const content = useMemo(() => {
     if (!sortedResult) {
@@ -90,11 +98,17 @@ const Landing: NextPage = () => {
 
   return (
     <ContentContainer>
-      <title>Pokemons</title>
+      <Head>
+        <title>Pokemons</title>
+      </Head>
       <NavigationBar
+        sortType={sortType ?? ResultSort.ASC}
+        pageSize={pageSizeValue ?? PageSize.TEN}
         onSearch={(text) => setSearchText(text)}
-        onSortTypeChange={(option) => setSortType(option.value)}
-        onPageSizeChange={(option) => setPageSize(Number(option.value))}
+        onSortTypeChange={(option) => setSortType(option.value as ResultSort)}
+        onPageSizeChange={(option) =>
+          setPageSizeValue(option.value as PageSize)
+        }
       />
       <Container>
         <Main>

@@ -2,6 +2,7 @@ import Typography from '@components/Typography';
 import { defaultPokemonImage } from '@constants/defaultImageSources';
 import { useDarkMode } from '@contexts/ThemeContext';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
 import {
   AbilitiesWrapper,
@@ -22,11 +23,16 @@ export interface CardProps {
 
 const Card = ({ image, name, height, weight, abilities }: CardProps) => {
   const theme = useTheme();
+  const router = useRouter();
   const darkMode = useDarkMode();
+
+  function handleClick() {
+    router.push(`/pokemon/${name}`);
+  }
 
   return (
     <CardContainer darkMode={darkMode}>
-      <ImageWrapper darkMode={darkMode}>
+      <ImageWrapper darkMode={darkMode} onClick={handleClick}>
         <Image
           src={image || defaultPokemonImage}
           fill
@@ -69,7 +75,7 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
 
       <Separator />
 
-      <DetailsButton>
+      <DetailsButton darkMode={darkMode} onClick={handleClick}>
         <Typography
           fontSize={18}
           font="bold"

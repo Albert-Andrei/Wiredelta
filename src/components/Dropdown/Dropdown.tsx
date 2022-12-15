@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IconWrapper, Item, Content, Trigger } from './Dropdown.styles';
 import Typography from '@components/Typography';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
@@ -9,23 +9,28 @@ import { useDarkMode } from '@contexts/ThemeContext';
 
 interface DropdownProps {
   label?: string;
+  value: string;
   options: DropdownMenuItem[];
   onChange: (option: DropdownMenuItem) => void;
 }
 
-const DropdownMenu = ({ label, options, onChange }: DropdownProps) => {
+const DropdownMenu = ({ label, options, value, onChange }: DropdownProps) => {
   const theme = useTheme();
   const darkMode = useDarkMode();
-  const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
+  // const [selectedItem, setSelectedItem] = useState<DropdownMenuItem>();
 
-  useEffect(() => {
-    if (options?.length > 0) {
-      setSelectedItem(options[0]);
-    }
-  }, []);
+  const selectedItem = useMemo(() => {
+    return options.find((x) => x.value === value) || options[0];
+  }, [value, options]);
+
+  // useEffect(() => {
+  //   if (options?.length > 0) {
+  //     setSelectedItem(options[0]);
+  //   }
+  // }, []);
 
   const handleChange = (option: DropdownMenuItem) => {
-    setSelectedItem(option);
+    // setSelectedItem(option);
     onChange(option);
   };
 
