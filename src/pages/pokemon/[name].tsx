@@ -41,6 +41,21 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
               <ThemeSwitch />
             </SwitchWrapper>
           </Grid>
+          <NameWrapper>
+            <Typography font="bold" textTransform="capitalize">
+              {pokemon.name}
+            </Typography>
+          </NameWrapper>
+          <DetailsWrapper>
+            <Typography>Height: {pokemon.height}</Typography>
+            <Typography>Weight: {pokemon.weight}</Typography>
+            <Typography>Base experience: {pokemon.base_experience}</Typography>
+            <Typography>Default: {'true'}</Typography>
+            <Typography>Order: {1}</Typography>
+            <Typography textTransform="capitalize">
+              Species: {pokemon.species.name}
+            </Typography>
+          </DetailsWrapper>
         </ContentContainer>
       </Container>
     </Main>
@@ -162,4 +177,25 @@ const SwitchWrapper = styled.div`
   height: 20px;
   display: flex;
   justify-content: flex-end;
+`;
+
+const NameWrapper = styled.div`
+  margin-top: 30px;
+
+  p {
+    font-size: 30px;
+  }
+`;
+
+const DetailsWrapper = styled.div`
+  margin-top: 15px;
+  height: 50px;
+  display: inline-grid;
+  grid-template-columns: repeat(6, auto);
+  gap: 50px;
+
+  p {
+    font-size: 20px;
+    color: ${({ theme }) => theme.default.fontColor};
+  }
 `;
