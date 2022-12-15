@@ -9,6 +9,8 @@ import ThemeSwitch from '@components/ThemeSwitch';
 import Typography from '@components/Typography';
 import { ArrowDown } from '@components/Icons/ArrowDown';
 import { useDarkMode } from '@contexts/ThemeContext';
+import Accordion from '@components/Accordion';
+import { defaultPokemonImage } from '@constants/defaultImageSources';
 
 interface PokemonPageProps {
   pokemon: Pokemon.PokemonResponse;
@@ -16,6 +18,9 @@ interface PokemonPageProps {
 
 const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
   const darkMode = useDarkMode();
+  if (pokemon === null) {
+    console.log('<Opaaaaaa>');
+  }
 
   return (
     <Main>
@@ -32,8 +37,8 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
             <ImageWrapper>
               <Image
                 fill
-                src={pokemon.sprites.front_default}
-                alt={pokemon.name}
+                src={pokemon?.sprites?.front_default || defaultPokemonImage}
+                alt={pokemon?.name}
               />
             </ImageWrapper>
 
@@ -43,19 +48,21 @@ const Pokemon: NextPage<PokemonPageProps> = ({ pokemon }) => {
           </Grid>
           <NameWrapper>
             <Typography font="bold" textTransform="capitalize">
-              {pokemon.name}
+              {pokemon?.name}
             </Typography>
           </NameWrapper>
           <DetailsWrapper>
-            <Typography>Height: {pokemon.height}</Typography>
-            <Typography>Weight: {pokemon.weight}</Typography>
-            <Typography>Base experience: {pokemon.base_experience}</Typography>
+            <Typography>Height: {pokemon?.height}</Typography>
+            <Typography>Weight: {pokemon?.weight}</Typography>
+            <Typography>Base experience: {pokemon?.base_experience}</Typography>
             <Typography>Default: {'true'}</Typography>
             <Typography>Order: {1}</Typography>
             <Typography textTransform="capitalize">
-              Species: {pokemon.species.name}
+              Species: {pokemon?.species.name}
             </Typography>
           </DetailsWrapper>
+
+          {/* <Accordion index={1} title={'Abilities'} content={''} /> */}
         </ContentContainer>
       </Container>
     </Main>
@@ -68,7 +75,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pokemons: Pokemon.Response = await fetcher('/pokemon?limit=1154');
 
   const paths = pokemons?.results.map((poky) => ({
-    params: { name: poky.name.toLocaleLowerCase() },
+    params: { name: poky.name },
   }));
 
   return {

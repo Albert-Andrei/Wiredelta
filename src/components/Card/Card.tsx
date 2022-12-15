@@ -1,4 +1,5 @@
 import Typography from '@components/Typography';
+import { defaultPokemonImage } from '@constants/defaultImageSources';
 import { useDarkMode } from '@contexts/ThemeContext';
 import Image from 'next/image';
 import { useTheme } from 'styled-components';
@@ -27,7 +28,7 @@ const Card = ({ image, name, height, weight, abilities }: CardProps) => {
     <CardContainer darkMode={darkMode}>
       <ImageWrapper darkMode={darkMode}>
         <Image
-          src={image || 'https://rerollcdn.com/ARCEUS/Pokemon/Egg.png'}
+          src={image || defaultPokemonImage}
           fill
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
