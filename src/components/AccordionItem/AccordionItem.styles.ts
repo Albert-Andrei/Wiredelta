@@ -24,7 +24,7 @@ export const TitleWrapper = styled(Accordion.Trigger)<{ darkMode: boolean }>`
   overflow: hidden;
   box-shadow: 0px 2px 10px ${({ theme }) => theme.default.shadow};
   border: 1px solid ${({ theme }) => theme.colors.white};
-  padding: 0 20px;
+  padding: 0 ${({ theme }) => theme.spacings.large}px;
 
   p {
     color: ${({ theme, darkMode }) =>
